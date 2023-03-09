@@ -1,32 +1,11 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 3.27"
-    }
-  }
-
-  required_version = ">= 0.14.9"
-}
-
-provider "aws" {
-  profile = "default"
-  region  = "us-west-1"
-}
-
-resource "aws_instance" "tomcat_server" {
-  ami             = "ami-060d3509162bcc386"
-  instance_type   = "t2.micro"
-  key_name        = "devops"
-  security_groups = ["default"]
-  user_data = file("tomcat.sh")
-
-  tags = {
-    Name = "Tomcatserver-terraform"
-  }
-}
-  resource "aws_security_group" "default" {
-    tags = {
-    type = "terraform-security-group"
-}
-}
+#!/bin/bash
+exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
+sudo su --
+hostname tomcat-server
+amazon-linux-extras install -y java-openjdk11
+cd /opt/
+wget https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.49/bin/apache-tomcat-8.5.49.tar.gz
+tar -xvzf apache-tomcat-8.5.49.tar.gz
+mv apache-tomcat-8.5.49 tomcat
+cd /opt/tomcat/bin/
+./startup.sh
