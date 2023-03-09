@@ -11,13 +11,13 @@ terraform {
 
 provider "aws" {
   profile = "default"
-  region  = "us-east-1"
+  region  = "us-west-1"
 }
 
 resource "aws_instance" "tomcat_server" {
-  ami             = "ami-0cff7528ff583bf9a"
+  ami             = "ami-060d3509162bcc386"
   instance_type   = "t2.micro"
-  key_name        = "devopskp"
+  key_name        = "devops"
   security_groups = ["default"]
   user_data = file("tomcat.sh")
 
@@ -26,7 +26,7 @@ resource "aws_instance" "tomcat_server" {
   }
 }
   resource "aws_security_group" "default" {
-	tags = {
-	type = "terraform-test-security-group"
+    tags = {
+    type = "terraform-security-group"
 }
 }
