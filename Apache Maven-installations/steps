@@ -1,0 +1,17 @@
+Maven Apache installation starts with      sudo su -
+mkdir /opt/maven
+cd /opt/maven
+wget https://dlcdn.apache.org/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.tar.gz
+tar -xvzf apache-maven-3.8.7-bin.tar.gz
+ll
+vi ~/.bash_profile
+I
+M2_HOME=/opt/maven/apache-maven-3.8.7
+M2=$M2_HOME/bin
+
+:$M2_HOME:$M2
+Press esc key
+:wq! enter
+
+sudo su -
+mvn --version
