@@ -16,11 +16,11 @@ infront of valve
  end of that line after >space  -->
 esc
 :wq!    enter
-vi /opt/apache-tomcat-11.0.0-M3/webapps/manager/META-INF/context.xml
+Example    vi /opt/apache-tomcat-11.0.0-M3/webapps/manager/META-INF/context.xml
 Insert
  <!--  <Valve className="org.apache.catalina.valves.RemoteAddrValve"
   allow="127.\d+.\d+.\d+|::1|0:0:0:0:0:0:0:1" /> -->
-:q! enter
+:wq! enter
 cd /opt/apache-tomcat-11.0.0-M3/
 ll
 cd conf
